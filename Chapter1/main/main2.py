@@ -6,7 +6,7 @@ imshow(im1)
 x=[50,40,30,20]
 y=[40,40,30,40]
 
-plot(x,y,'r*')
+plot(x,y,'b*')
 plot(x[:2],y[:2])
 
 title('plotting:"ebara.jpg"')
