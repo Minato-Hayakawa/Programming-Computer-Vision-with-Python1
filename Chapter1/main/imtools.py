@@ -1,5 +1,6 @@
 from PIL import Image
 import numpy as num
+from pylab import *
 class imtools:
     def imresize(im,sz):
         pil_im=Image.fromarray(uint8(im))
@@ -13,4 +14,4 @@ class imtools:
 
 imtoolsobj=imtools()
 im1=num.array(Image.open('out/IMG_6417.jpg'))
-im2,cdf=imtoolsobj.
+im2,cdf=imtoolsobj.histeq(im1)
