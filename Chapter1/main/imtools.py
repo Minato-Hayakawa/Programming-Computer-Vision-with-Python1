@@ -1,27 +1,20 @@
 from PIL import Image
 import numpy as num
+import matplotlib.pyplot as plt
 from pylab import *
 class imtools:
-    def imresize(im,sz):
+    def imresize(self,im,sz):
         pil_im=Image.fromarray(uint8(im))
         return num.array(pil_im.resize(sz))
-    def histeq(im,nbr_bins=256):
-        imhist,bins=num.histogram(im.flatten(),nbr_bins,normed=True)
+    def histeq(self,im,nbr_bins=256):
+        imhist,bins=num.histogram(im.flatten(),nbr_bins,density=True)
         cdf=imhist.cumsum()
         cdf=255*cdf/cdf[-1]
         im2=num.interp(im.flatten(),bins[:-1],cdf)
         return im2.reshape(im.shape),cdf
-    def compute_average(imlist):
-        averageim=array(Image.open(imlist[0]),'f')
-        for imname in imlist[1:]:
-            try:
-                averageim+=array(Image.open(imname))
-            except:
-                print (imname+ '...skipped')
-        averageim/=len(imlist)
-        
-        return array(averageim,'uint8')
 
 imtoolsobj=imtools()
 im1=num.array(Image.open('out/IMG_6417.jpg'))
 im2,cdf=imtoolsobj.histeq(im1)
+plt.imshow(im2)
+plt.show()
