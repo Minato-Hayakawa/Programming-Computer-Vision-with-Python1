@@ -11,6 +11,16 @@ class imtools:
         cdf=255*cdf/cdf[-1]
         im2=num.interp(im.flatten(),bins[:-1],cdf)
         return im2.reshape(im.shape),cdf
+    def compute_average(imlist):
+        averageim=array(Image.open(imlist[0]),'f')
+        for imname in imlist[1:]:
+            try:
+                averageim+=array(Image.open(imname))
+            except:
+                print (imname+ '...skipped')
+        averageim/=len(imlist)
+        
+        return array(averageim,'uint8')
 
 imtoolsobj=imtools()
 im1=num.array(Image.open('out/IMG_6417.jpg'))
