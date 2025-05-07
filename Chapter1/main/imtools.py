@@ -12,12 +12,19 @@ class imtools:
         cdf=255*cdf/cdf[-1]
         im2=num.interp(im.flatten(),bins[:-1],cdf)
         return im2.reshape(im.shape),cdf
+    
+    #imlistにn個の画像がある。
     def compute_average(self,imlist):
-        averageim=num.array(Image.open(imlist[0]),'f') #'f'でfloat型に
-        for imname in imlist[1:]: #imlistの1行目の値をすべてimnameに代入
+        averageim=num.array(Image.open(imlist[0]),'f') 
+        #'f'でfloat型に
+        #imlistの0番目をopen
+        for imname in imlist[1:]: 
             try:
                 averageim+=array(Image.open(imname))
+                #imlistの1~n行目までの行列の和を求める。
             except:
                 print(imname+'....skipped')
         averageim/=len(imlist)
+        #imlistの1~n行目までの行列の和をnで割り、平均を求める。
         return array(averageim,'uint8')
+    
