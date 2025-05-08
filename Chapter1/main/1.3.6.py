@@ -10,10 +10,10 @@ def pca(x):
     if dim>num_data:
         M=np.dot(x,x.T)#xとx^tの積
         e,EV=np.linalg.eigh(M) #Mの固有値e,固有ベクトルEVを求める。
-        tmp=np.dot(x.T,EV).T
-        V=tmp[::-1]
-        S=np.sqrt(e)[::-1]
-        for i in range(V.shape[1]):
+        tmp=np.dot(x.T,EV).T #行ベクトルtmp
+        V=tmp[::-1] #tmpの成分の順番を入れ替える。
+        S=np.sqrt(e)[::-1] #固有値の成分をルートをとり、順番を入れ替える。
+        for i in range(V.shape[1]): #V.shape[1]でVの列成分を取得。
             V[:i]/=S
     else:
         U,S,V=np.linalg.svd(x)
