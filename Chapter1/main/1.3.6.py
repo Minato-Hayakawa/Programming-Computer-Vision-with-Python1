@@ -8,7 +8,7 @@ def pca(x):
     mean_x=x.mean(axis=0)#行方向の平均をとる。列ベクトルになる。
     x=x-mean_x
     if dim>num_data:
-        M=np.dot(x,x.T)#xとx^tの積
+        M=np.dot(x,x.T)#xとx^tの積をとり、行列Mをつくる。
         e,EV=np.linalg.eigh(M) #Mの固有値e,固有ベクトルEVを求める。
         tmp=np.dot(x.T,EV).T #行ベクトルtmp
         V=tmp[::-1] #tmpの成分の順番を入れ替える。
